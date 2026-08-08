@@ -73,6 +73,24 @@ manual intervention.
   build and reinstalling costs minutes and can break CUDA. `env.describe()` logs what actually ran.
 - `env.py` is implemented, not stubbed — Phase 01's bootstrap cell needs a working `describe()`.
   Phase 02 extends it with the gated-access checks.
-- `git init` done; no commit yet, so `env.git_sha()` returns `None` (handled, not an error).
-- `notebooks/benchmark.ipynb` has a `REPO_URL` placeholder that must be set once the repo has a
-  remote (D10).
+- Repo is public at `https://github.com/Kushal-0532/capstone_diarization_benchmark` (user decision,
+  2026-08-08). Public was chosen over private so Colab clones unauthenticated — the D10 Drive-mount
+  fallback is therefore not needed. `results/` and `data/` are gitignored; no token is committed.
+- `notebooks/benchmark.ipynb` `REPO_URL` now points at that remote.
+- **The notebook runs locally as well as in Colab**, every cell branching on `IN_COLAB` (user
+  request, 2026-08-08: prototype locally instead of re-uploading on every change). Local path skips
+  clone / `pip install` / Drive mount / `userdata`, resolves the repo root by walking up for
+  `pyproject.toml`, and takes `HF_TOKEN` from the shell environment. `env.in_colab()` is the same
+  check, available to the runners.
+- **First Colab failure was `benchmark` not importable after `pip install -e`.** An editable install
+  writes a `.pth` that only a fresh interpreter reads, so an install and an import in the same
+  kernel session cannot both work without a restart. Fixed by inserting the repo root on `sys.path`
+  after installing — the flat layout makes that sufficient. Do not "fix" this by adding a kernel
+  restart; it would break resume-after-restart ergonomics for every later phase.
+- Verified by executing the notebook headless: `uv run jupyter execute notebooks/benchmark.ipynb`.
+  All five code cells pass locally.
+- `[dev]` extra (jupyterlab, ipykernel, nbclient) is unpinned on purpose — dev tooling never
+  touches a reported number, so C6 does not apply to it.
+- Colab currently runs **Python 3.12**, inside `requires-python = ">=3.11,<3.13"`. Local env is
+  3.11.14, so the two legs are not on the same interpreter — acceptable (no C-ABI-sensitive code
+  here), but `env.describe()` records it per record.

@@ -32,6 +32,9 @@ dependencies = [
 ]
 
 [project.optional-dependencies]
+# Local prototyping: run the same notebook here instead of round-tripping through Colab.
+# Unpinned on purpose: dev tooling never touches a reported number, so C6 does not apply.
+dev = ["jupyterlab", "ipykernel", "nbclient"]
 # 4-bit NF4 for the 12B variant on a T4 (OQ3). Linux+CUDA only, hence not a core dep.
 quant = ["bitsandbytes==0.50.0"]
 

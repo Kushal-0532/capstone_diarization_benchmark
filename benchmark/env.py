@@ -6,6 +6,7 @@ back to the runtime that made it.
 
 from __future__ import annotations
 
+import os
 import platform
 import subprocess
 import sys
@@ -21,6 +22,11 @@ TRACKED_PACKAGES = (
     "librosa",
     "bitsandbytes",
 )
+
+
+def in_colab() -> bool:
+    """True inside a Colab runtime. The notebook branches on this so it also runs locally."""
+    return "google.colab" in sys.modules or "COLAB_RELEASE_TAG" in os.environ
 
 
 def package_versions() -> dict[str, str | None]:
@@ -95,6 +101,7 @@ def describe() -> dict[str, object]:
     """Full provenance blob embedded in every result record."""
     return {
         "runtime": runtime_id(),
+        "colab": in_colab(),
         "hardware": hardware(),
         "packages": package_versions(),
         "git_sha": git_sha(),
