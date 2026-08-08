@@ -15,7 +15,7 @@
 
 | # | Phase | Status | File |
 |---|-------|--------|------|
-| 1 | Package scaffold + Colab bootstrap | 🔲 todo | [phases/01-scaffold.md](phases/01-scaffold.md) |
+| 1 | Package scaffold + Colab bootstrap | ✅ done | [phases/01-scaffold.md](phases/01-scaffold.md) |
 | 2 | Gated access + environment verification | 🔲 todo | [phases/02-access-env.md](phases/02-access-env.md) |
 | 3 | **Gemma diarization smoke test (risk kill)** | 🔲 todo | [phases/03-gemma-smoke-test.md](phases/03-gemma-smoke-test.md) |
 | 4 | AMI subset acquisition | 🔲 todo | [phases/04-ami-data.md](phases/04-ami-data.md) |
@@ -57,3 +57,4 @@
 ## Completion Log
 <!-- Append here when each phase is verified done -->
 <!-- Format: - Phase N — [date] — [brief note] -->
+- Phase 1 — 2026-08-08 — `benchmark` package + dual-mode (Colab/local) bootstrap notebook. Repo public at github.com/Kushal-0532/capstone_diarization_benchmark. Open: pyannote 3.1.1 vs huggingface-hub 1.x compatibility (Phase 02); Colab run unverified.

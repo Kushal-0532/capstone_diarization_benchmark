@@ -1,7 +1,7 @@
 # Phase 01 — Package scaffold + Colab bootstrap
 
 ## Status
-🔄 in-progress
+✅ done
 
 ## Goal
 An installable `benchmark` package that a fresh Colab runtime can clone and `pip install -e .`,
@@ -40,13 +40,13 @@ Python module locally.
 - Notebook cells stay ≤10 lines each.
 
 ## Acceptance Criteria
-- [ ] `uv pip install -e .` succeeds locally on Debian 13; `python -c "import benchmark; print(benchmark.__version__)"` works.
-- [ ] Every module listed above exists and imports without error.
-- [ ] `benchmark.config` exposes COLLAR, SKIP_OVERLAP, EXCERPT_SECONDS, GEMMA_WINDOW_SECONDS, SEED,
+- [x] `uv pip install -e .` succeeds locally on Debian 13; `python -c "import benchmark; print(benchmark.__version__)"` works.
+- [x] Every module listed above exists and imports without error.
+- [x] `benchmark.config` exposes COLLAR, SKIP_OVERLAP, EXCERPT_SECONDS, GEMMA_WINDOW_SECONDS, SEED,
       the 4 system ids and the 2 dataset ids.
-- [ ] Bootstrap cell in Colab: installs the package, mounts Drive, prints a runtime description,
+- [x] Bootstrap cell in Colab: installs the package, mounts Drive, prints a runtime description,
       reads `HF_TOKEN` from Colab secrets without printing it.
-- [ ] `git grep -n "hf_"` finds no hardcoded token anywhere.
+- [x] `git grep -n "hf_"` finds no hardcoded token anywhere.
 
 ## Test Instructions
 ```bash
